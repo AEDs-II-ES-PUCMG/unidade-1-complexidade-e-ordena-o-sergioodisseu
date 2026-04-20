@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class App {
     static final int[] tamanhosTesteGrande =  { 31_250_000, 62_500_000, 125_000_000, 250_000_000, 500_000_000 };
@@ -38,21 +39,36 @@ public class App {
 
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         int tam = 20;
         Integer[] vetor = gerarVetorObjetos(tam);
 
-        BubbleSort<Integer> bolha = new BubbleSort<>();
+        System.out.println("Escolha o método de ordenação:");
+        System.out.println("1 - BubbleSort");
+        System.out.println("2 - InsertionSort");
+        System.out.println("3 - SelectionSort");
+        System.out.println("4 - MergeSort");
+        int opcao = scanner.nextInt();
 
-        Integer[] vetorOrdenadoBolha = bolha.ordenar(vetor);
+        IOrdenador<Integer> ordenador;
 
-        System.out.println("\nVetor ordenado método Bolha:");
-        System.out.println("Comparações: " + bolha.getComparacoes());
-        System.out.println("Movimentações: " + bolha.getMovimentacoes());
-        System.out.println("Tempo de ordenação (ms): " + bolha.getTempoOrdenacao());
+        switch (opcao) {
+            case 1 -> ordenador = new BubbleSort<>();
+            case 2 -> ordenador = new InsertionSort<>();
+            case 3 -> ordenador = new SelectionSort<>();
+            default -> {
+                System.out.println("Opção inválida.");
+                scanner.close();
+                return;
+            }
+        }
 
-        /* TO DO
-        *Fazer a implementacao do restante do main para a ordenacao 
-        *  com os algoritmos InsertionSort e SelectionSort
-        */
+        Integer[] vetorOrdenado = ordenador.ordenar(vetor);
+        System.out.println("\nVetor ordenado:");
+        System.out.println("Comparações: " + ordenador.getComparacoes());
+        System.out.println("Movimentações: " + ordenador.getMovimentacoes());
+        System.out.println("Tempo de ordenação (ms): " + ordenador.getTempoOrdenacao());
+
+        scanner.close();
     }
 }
