@@ -56,6 +56,7 @@ public class App {
             case 1 -> ordenador = new BubbleSort<>();
             case 2 -> ordenador = new InsertionSort<>();
             case 3 -> ordenador = new SelectionSort<>();
+            case 4 -> ordenador = new MergeSort<>();
             default -> {
                 System.out.println("Opção inválida.");
                 scanner.close();
