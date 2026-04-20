@@ -189,8 +189,7 @@ public class AppOficina {
 
         while(esquerda <= direita){
             int meio = (esquerda + direita) / 2;
-            int comparacao = ordenadosPorDescricao[meio].toString()
-                        .compareToIgnoreCase(descricao);
+            int comparacao = ordenadosPorDescricao[meio].descricao.compareToIgnoreCase(descricao);
 
             if(comparacao == 0) 
                 return ordenadosPorDescricao[meio];
@@ -261,8 +260,8 @@ public class AppOficina {
         embaralharProdutos();
 
         Mergesort<Produto> ms = new Mergesort<>();
-        ordenadosPorCodigo = ms.ordenar(produtos, new ComparadorPorCodigo());
-        ordenadosPorDescricao = ms.ordenar(produtos, Comparator.naturalOrder());
+        ordenadosPorCodigo = ms.ordenar(Arrays.copyOf(produtos, quantProdutos), new ComparadorPorCodigo());
+        ordenadosPorDescricao = ms.ordenar(Arrays.copyOf(produtos, quantProdutos), Comparator.naturalOrder());
 
         int opcao = -1;
         
